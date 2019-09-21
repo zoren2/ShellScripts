@@ -6,7 +6,7 @@ VALID=0
 
 while [ $VALID -eq 0 ]
 do
-	read -p "Please enter you rname and age: " NAME AGE
+	read -p "Please enter your name and age: " NAME AGE
 	if [[ ( -z $NAME ) || ( -z $AGE ) ]]
 	then
 		echo "Not enough parameters passed"
