@@ -9,8 +9,6 @@ TOTALHARDWAREMEM=`sysctl -a | awk '/hw.m/{print $2}'`
 
 #vm_stat is used to determine free virtual memory - macOSX "hack" to get output similar to linux "Free" from StackOverflow
 FREEVMEM=`vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);' | awk '/free/ {print $2}'`
-echo $FREEVMEM
-
 
 #Variables required to determine total Virtual Memory. As a note it is normal for small varaibility in VM memory in Mac OSX.
 ACTIVEVMEM=`vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);' | awk '/^active/ {print $2}'`
@@ -29,8 +27,9 @@ TOTALVMMEM=$(echo $FREEVMEM+$ACTIVEVMEM+$INACTIVEVMEM+$SPECULATIVEVMEM+$WIREDVME
 #Divide Free Memory by Total V Memory to get percentage
 FREEVMEMPERCENTAGE=$(echo "scale=2 ; $FREEVMEM / $TOTALVMMEM" | bc)
 
-echo $TOTALVMMEM
+echo Free VMEM: $FREEVMEM Mi
+echo VMEM Total: $TOTALVMMEM Mi
 
-echo $FREEVMEMPERCENTAGE
+echo Total VM Percent: $FREEVMEMPERCENTAGE%
 
 exit 0
