@@ -10,5 +10,6 @@ do
 	TOTAL=$(echo $TOTAL+$SAMPLE | bc ) #Adds the sampled number into TOTAL in order to find average.
 done
 
-echo "scale=2; $TOTAL / $NUMOFSAMPLES" | bc
+FLOAT=$(echo "scale=2; $TOTAL / $NUMOFSAMPLES" | bc)
+echo $FLOAT
 exit 0
